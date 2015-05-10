@@ -14,7 +14,7 @@ setup(
     description='A performant python library for caching tiles in-memory using memcached.',
     long_description=open('README.md').read(),
     download_url="https://github.com/tilejet/tilejet-cache/zipball/master",
-    py_modules=["tilejet-cache"],
+    packages=["tilejetcache"],
     classifiers = [
         'Development Status :: 1 - Beta',
         'Intended Audience :: Developers',
