@@ -29,6 +29,7 @@ def get_from_cache(cache_location, cache_params, name, key, GEVENT_MONKEY_PATCH=
     cache = None
     item = None
     try:
+        from umemcache import MemcachedError
         from memcachepool.cache import UMemcacheCache
         cache = UMemcacheCache(cache_location, cache_params)
         #cache = caches['tiles']
@@ -38,9 +39,10 @@ def get_from_cache(cache_location, cache_params, name, key, GEVENT_MONKEY_PATCH=
     if cache:
         try:
             item = cache.get(key)
-        except umemcache.MemcachedError, e:
+        except MemcachedError, e:
             print e
             item = None
+
     return (cache, item)
 
 
@@ -83,6 +85,7 @@ def commit_to_cache(cache_location, cache_params, key, obj, GEVENT_MONKEY_PATCH=
     cache = None
     success = False
     try:
+        from umemcache import MemcachedError
         from memcachepool.cache import UMemcacheCache
         cache = UMemcacheCache(cache_location, cache_params)
         #cache = caches['tiles']
@@ -93,8 +96,10 @@ def commit_to_cache(cache_location, cache_params, key, obj, GEVENT_MONKEY_PATCH=
         try:
             cache.set(key, obj)
             success = True
-        except:
+        except MemcachedError, e:
+            print e
             success = False
+
     return success
 
 
@@ -104,7 +109,9 @@ def check_cache_availability(cache_location, cache_params, GEVENT_MONKEY_PATCH=F
         from gevent import monkey
         monkey.patch_all()
     available = False
+    cache = None
     try:
+        from umemcache import MemcachedError
         from memcachepool.cache import UMemcacheCache
         cache = UMemcacheCache(cache_location, cache_params)
         #cache = caches['tiles']
@@ -112,7 +119,9 @@ def check_cache_availability(cache_location, cache_params, GEVENT_MONKEY_PATCH=F
         #tilecache = caches[cache]
         cache.get('')
         available = True
-    except:
+    except MemcachedError, e:
+        print e
         available = False
+
     return available
 
