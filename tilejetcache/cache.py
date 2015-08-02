@@ -20,8 +20,11 @@ def getTileFromCache(cache_location, cache_params, name, key, check, GEVENT_MONK
 def get_from_cache(cache_location, cache_params, name, key, GEVENT_MONKEY_PATCH=False):
     if GEVENT_MONKEY_PATCH:
         # Import Gevent and monkey patch
-        from gevent import monkey
-        monkey.patch_all()
+        try:
+            from gevent import monkey
+            monkey.patch_all()
+        except:
+            print "gevent monkey patch failed"
     # Import Django Cache (mozilla/django-memcached-pool)
     #from django.core.cache import cache, caches, get_cache
     #from django.core.cache import caches
@@ -76,8 +79,12 @@ def getValue(d, name, fallback=None):
 def commit_to_cache(cache_location, cache_params, key, obj, GEVENT_MONKEY_PATCH=False):
     if GEVENT_MONKEY_PATCH:
         # Import Gevent and monkey patch
-        from gevent import monkey
-        monkey.patch_all()
+        try:
+            from gevent import monkey
+            monkey.patch_all()
+        except:
+            print "gevent monkey patch failed"
+
     # Import Django Cache (mozilla/django-memcached-pool)
     #from django.core.cache import cache, caches, get_cache
     #from django.core.cache import caches
@@ -106,8 +113,12 @@ def commit_to_cache(cache_location, cache_params, key, obj, GEVENT_MONKEY_PATCH=
 def check_cache_availability(cache_location, cache_params, GEVENT_MONKEY_PATCH=False):
     if GEVENT_MONKEY_PATCH:
         # Import Gevent and monkey patch
-        from gevent import monkey
-        monkey.patch_all()
+        try:
+            from gevent import monkey
+            monkey.patch_all()
+        except:
+            print "gevent monkey patch failed"
+
     available = False
     cache = None
     try:

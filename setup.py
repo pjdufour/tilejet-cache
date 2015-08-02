@@ -16,7 +16,7 @@ setup(
     download_url="https://github.com/tilejet/tilejet-cache/zipball/master",
     packages=["tilejetcache"],
     classifiers = [
-        'Development Status :: 1 - Beta',
+        'Development Status :: 4 - Beta',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: MIT License',
         'Topic :: Software Development :: Libraries :: Python Modules'
