@@ -1,3 +1,7 @@
+import errno
+from socket import error as socket_error
+
+
 def getTileFromCache(cache_location, cache_params, name, key, check, GEVENT_MONKEY_PATCH=False):
     tilecache, tile = get_from_cache(
         cache_location,
@@ -42,6 +46,9 @@ def get_from_cache(cache_location, cache_params, name, key, GEVENT_MONKEY_PATCH=
     if cache:
         try:
             item = cache.get(key)
+	except socket_error, e:
+            print e
+            item = None        
         except MemcachedError, e:
             print e
             item = None
